@@ -1,3 +1,4 @@
+import { LogoutComponent } from './components/logout/logout.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 import { AuthorizedComponent } from './components/authorized/authorized.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'authorized', component: AuthorizedComponent },
   { path: 'user', component: UserComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

@@ -24,5 +24,10 @@ export class TokenService {
   getRefreshToken(): string | null {
     return localStorage.getItem(REFRESH_TOKEN);
   }
+
+  clear(): void {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+  }
   
 }
