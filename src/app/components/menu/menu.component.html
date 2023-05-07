@@ -10,15 +10,15 @@
             <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  routerLink="/user">User</a>
+            <a class="nav-link"  routerLink="/user" *ngIf="isLogged">User</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  routerLink="/admin">Admin</a>
+            <a class="nav-link"  routerLink="/admin" *ngIf="isAdmin">Admin</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
-          <button class="btn btn-outline-success" type="button" (click)="onLogin()">Login</button>
-          <button class="btn btn-outline-danger" type="button" (click)="onLogout()">Logout</button>
+          <button class="btn btn-outline-success" type="button" (click)="onLogin()" *ngIf="!isLogged">Login</button>
+          <button class="btn btn-outline-danger" type="button" (click)="onLogout()" *ngIf="isLogged">Logout</button>
         </form>
       </div>
     </div>
