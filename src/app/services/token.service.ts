@@ -1,7 +1,10 @@
 import { Injectable, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core';
+import * as CryptoJS from 'crypto-js'; 
+import { environment } from 'src/environments/environment';
 
 const ACCESS_TOKEN = 'access_token';
 const REFRESH_TOKEN = 'refresh_token';
+const CODE_VERIFIER = 'code_verifier';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +50,23 @@ export class TokenService {
       return false;
     }
     return true;
+  }
 
+  setVerifier(code_verifier: string): void {
+    if(localStorage.getItem(CODE_VERIFIER)) {
+      this.deleteVerifier();
+    }
+    const encrypted = CryptoJS.AES.encrypt(code_verifier, environment.secret_pkce);
+    localStorage.setItem(CODE_VERIFIER, encrypted.toString());
+  }
+
+  getVerifier(): string {
+    const encrypted = localStorage.getItem(CODE_VERIFIER);
+    const decrypted = CryptoJS.AES.decrypt(encrypted, environment.secret_pkce).toString(CryptoJS.enc.Utf8);
+    return decrypted;
   }
   
+  deleteVerifier(): void {
+    localStorage.removeItem(CODE_VERIFIER);
+  }
 }

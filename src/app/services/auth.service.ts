@@ -12,13 +12,13 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getToken(code: string): Observable<any> {
+  public getToken(code: string, code_verifier: string): Observable<any> {
     let body = new URLSearchParams();
     body.set('grant_type', environment.grant_type);
     body.set('client_id', environment.client_id);
     body.set('redirect_uri', environment.redirect_uri);
     body.set('scope', environment.scope);
-    body.set('code_verifier', environment.code_verifier);
+    body.set('code_verifier', code_verifier);
     body.set('code', code);
     const basic_auth = 'Basic '+ btoa('client:secret');
     const headers_object = new HttpHeaders({
