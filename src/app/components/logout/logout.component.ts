@@ -1,3 +1,4 @@
+import { TokenService } from './../../services/token.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class LogoutComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
+    this.tokenService.clear();
     this.router.navigate(['']);
   }
 
